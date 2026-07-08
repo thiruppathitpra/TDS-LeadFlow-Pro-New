@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TDS LeadFlow Pro - Real Estate Lead Management CRM</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #0D5F7F 0%, #17A2B8 100%);
+            color: white;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: opacity 0.3s;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+
+        .cta-button {
+            background: white;
+            color: #0D5F7F;
+            padding: 10px 25px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #0D5F7F 0%, #17A2B8 100%);
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 30px;
+            opacity: 0.95;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: white;
+            color: #0D5F7F;
+            padding: 16px 40px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            padding: 16px 40px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+            border: 2px solid white;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: #0D5F7F;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Section */
+        section {
+            padding: 70px 20px;
+        }
+
+        section h2 {
+            font-size: 36px;
+            margin-bottom: 50px;
+            text-align: center;
+            color: #0D5F7F;
+        }
+
+        /* Features */
+        .features {
+            background: #f8f9fa;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+            border: 1px solid #e0e0e0;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+            border-color: #17A2B8;
+        }
+
+        .feature-icon {
+            font-size: 40px;
+            color: #17A2B8;
+            margin-bottom: 15px;
+        }
+
+        .feature-card h3 {
+            color: #0D5F7F;
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+
+        .feature-card p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        /* Pricing */
+        .pricing {
+            background: white;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .pricing-card {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .pricing-card.featured {
+            border: 2px solid #17A2B8;
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(23, 162, 184, 0.2);
+        }
+
+        .pricing-card:hover {
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .featured-badge {
+            background: #17A2B8;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .pricing-card h3 {
+            font-size: 24px;
+            color: #0D5F7F;
+            margin: 20px 0 10px;
+        }
+
+        .price {
+            font-size: 42px;
+            font-weight: bold;
+            color: #17A2B8;
+            margin: 20px 0;
+        }
+
+        .price-period {
+            color: #999;
+            font-size: 14px;
+            margin-bottom: 30px;
+        }
+
+        .pricing-card ul {
+            list-style: none;
+            margin: 30px 0;
+            text-align: left;
+        }
+
+        .pricing-card li {
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .pricing-card li:before {
+            content: "✓";
+            color: #17A2B8;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .pricing-card .btn-primary {
+            width: 100%;
+            margin-top: 30px;
+        }
+
+        /* Benefits */
+        .benefits {
+            background: #f8f9fa;
+        }
+
+        .benefits-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .benefits-text h3 {
+            font-size: 28px;
+            color: #0D5F7F;
+            margin-bottom: 25px;
+        }
+
+        .benefit-item {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .benefit-item .icon {
+            font-size: 24px;
+            color: #17A2B8;
+            flex-shrink: 0;
+        }
+
+        .benefit-item p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .benefits-image {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            text-align: center;
+            color: #ccc;
+            font-size: 60px;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, #0D5F7F 0%, #17A2B8 100%);
+            color: white;
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .cta-section h2 {
+            color: white;
+            margin-bottom: 30px;
+            font-size: 36px;
+        }
+
+        .cta-section p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            opacity: 0.95;
+        }
+
+        /* Footer */
+        footer {
+            background: #0D5F7F;
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            font-size: 13px;
+            margin-bottom: 10px;
+            display: block;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.2);
+            padding-top: 20px;
+            font-size: 13px;
+            opacity: 0.8;
+        }
+
+        /* Stats */
+        .stats {
+            background: white;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 30px;
+            background: linear-gradient(135deg, #E8F4F8 0%, #F0F9FB 100%);
+            border-radius: 10px;
+            border: 1px solid #17A2B8;
+        }
+
+        .stat-number {
+            font-size: 42px;
+            font-weight: bold;
+            color: #17A2B8;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            color: #0D5F7F;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            background: #f8f9fa;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .testimonial-card {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            border-left: 4px solid #17A2B8;
+        }
+
+        .stars {
+            color: #FFC107;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        .testimonial-text {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 15px;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            font-weight: bold;
+            color: #0D5F7F;
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .benefits-content {
+                grid-template-columns: 1fr;
+            }
+
+            .pricing-card.featured {
+                transform: scale(1);
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            section h2 {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <div class="logo">TDS LeadFlow Pro</div>
+            <ul class="nav-links">
+                <li><a href="#features">Features</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#testimonials">Reviews</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            
+             <button class="cta-button"
+onclick="window.open('https://rzp.io/rzp/fIwku3mv','_blank')">
+Buy Now
+</button>
+
+
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>🏡 Manage Real Estate Leads Like a Pro</h1>
+            <p>TDS LeadFlow Pro - The #1 CRM Solution for Real Estate Agents & Brokers</p>
+            <p style="opacity: 0.9; font-size: 16px; margin-bottom: 40px;">Automate lead tracking, follow-ups, and close more deals with our professional Excel-based CRM system.</p>
+            <div class="hero-buttons">
+<button class="btn-secondary"
+onclick="window.open('https://rzp.io/rzp/fIwku3mv','_blank')">
+Buy Now
+</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats -->
+    <div class="container">
+        <div class="stats">
+            <div class="stat-card">
+                <div class="stat-number">500+</div>
+                <div class="stat-label">Real Estate Professionals</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">10K+</div>
+                <div class="stat-label">Leads Managed Daily</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">35%</div>
+                <div class="stat-label">Higher Conversion Rate</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">24/7</div>
+                <div class="stat-label">Expert Support</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <h2>Powerful Features for Real Estate Success</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Smart Dashboard</h3>
+                    <p>Real-time overview of all your leads, hot prospects, pending follow-ups, and closed deals with beautiful charts.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">👥</div>
+                    <h3>Lead Database</h3>
+                    <p>Organize all client information - property type, budget, location, bedrooms, and more in one secure place.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">📞</div>
+                    <h3>Follow-up Tracking</h3>
+                    <p>Never miss a follow-up. Get automated reminders and track every interaction with your leads.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">📈</div>
+                    <h3>Sales Reports</h3>
+                    <p>Generate detailed reports on your sales pipeline, conversion rates, and performance metrics.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🔐</div>
+                    <h3>Secure & Encrypted</h3>
+                    <p>Military-grade encryption keeps your client data safe and compliant with industry standards.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Lightning Fast</h3>
+                    <p>Built on Excel for instant loading, offline access, and no complicated setup required.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="benefits">
+        <div class="container">
+            <div class="benefits-content">
+                <div class="benefits-text">
+                    <h3>Why Real Estate Professionals Choose TDS LeadFlow Pro</h3>
+
+                    <div class="benefit-item">
+                        <div class="icon">✅</div>
+                        <div>
+                            <p><strong>Easy to Use</strong> - No technical training needed. Works just like Excel that you already know.</p>
+                        </div>
+                    </div>
+
+                    <div class="benefit-item">
+                        <div class="icon">✅</div>
+                        <div>
+                            <p><strong>Affordable</strong> - Save thousands compared to traditional CRM software. Starts at just ₹29/month.</p>
+                        </div>
+                    </div>
+
+                    <div class="benefit-item">
+                        <div class="icon">✅</div>
+                        <div>
+                            <p><strong>Quick Setup</strong> - Import your existing leads in minutes. Start using immediately.</p>
+                        </div>
+                    </div>
+
+                    <div class="benefit-item">
+                        <div class="icon">✅</div>
+                        <div>
+                            <p><strong>Offline Ready</strong> - Works without internet. Sync when connected. Perfect for field visits.</p>
+                        </div>
+                    </div>
+
+                    <div class="benefit-item">
+                        <div class="icon">✅</div>
+                        <div>
+                            <p><strong>Expert Support</strong> - Dedicated team available to help you succeed at every step.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="benefits-image">
+                    📊 Dashboard Preview
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="pricing">
+        <div class="container">
+            <h2>Simple, Transparent Pricing</h2>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    
+                    
+                </div>
+
+                <div class="pricing-card featured">
+                    <div class="featured-badge">MOST POPULAR</div>
+                    <h3>Professional</h3>
+                    <div class="price">₹499</div>
+                    <div class="price-period">One Time Payment </div>
+                    <ul>
+                        <li>Unlimited leads</li>
+                        <li>Advanced dashboard</li>
+                        <li>Lead + follow-up management</li>
+                        <li>Priority support</li>
+                        <li>Advanced reports & charts</li>
+                        <li>Multi-user access (5 users)</li>
+                        <li>Custom templates</li>
+                    </ul>
+
+<button class="btn-primary"
+onclick="window.open('https://rzp.io/rzp/fIwku3mv','_blank')">
+Buy Now
+</button>
+                </div>
+
+                <div class="pricing-card">
+                   
+                 
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 40px; color: #666;">
+                <p>✓ 14-day free trial • ✓ No credit card required • ✓ Cancel anytime • ✓ Money-back guarantee</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="testimonials">
+        <div class="container">
+            <h2>What Real Estate Professionals Say</h2>
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                    <div class="testimonial-text">"TDS LeadFlow Pro has transformed how I manage leads. I've closed 35% more deals since I started using it!"</div>
+                    <div class="testimonial-author">- Rajesh Kumar, Real Estate Agent</div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                    <div class="testimonial-text">"Simple, affordable, and powerful. Exactly what a real estate business needs. No complicated setups!"</div>
+                    <div class="testimonial-author">- Priya Sharma, Broker</div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                    <div class="testimonial-text">"The support team is amazing! They helped me get everything set up perfectly. Highly recommended!"</div>
+                    <div class="testimonial-author">- Arun Patel, Real Estate Director</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="contact" class="cta-section">
+        <div class="container">
+            <h2>Ready to Close More Deals?</h2>
+            <p>Join 500+ real estate professionals using TDS LeadFlow Pro to manage their business</p>
+
+<button class="btn-primary"
+onclick="window.open('https://rzp.io/rzp/fIwku3mv','_blank')"
+style="background:white;color:#0D5F7F;padding:16px 50px;font-size:18px;">
+Buy Now
+</button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h4>Product</h4>
+                <ul>
+                    <li><a href="#">Features</a></li>
+                    <li><a href="#">Pricing</a></li>
+                    <li><a href="#">Security</a></li>
+                    <li><a href="#">FAQs</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="#">Help Center</a></li>
+                    <li><a href="#">Documentation</a></li>
+                    <li><a href="#">Contact Support</a></li>
+                    <li><a href="#">Status Page</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h4>Connect</h4>
+                <ul>
+                    <li><a href="#">Twitter</a></li>
+                    <li><a href="#">LinkedIn</a></li>
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">Instagram</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2024 TDS LeadFlow Pro by Thiru Digital Solutions. All rights reserved.</p>
+            <p style="margin-top: 10px; font-size: 12px;"><a href="#" style="color: rgba(255,255,255,0.6);">Privacy Policy</a> | <a href="#" style="color: rgba(255,255,255,0.6);">Terms of Service</a></p>
+        </div>
+    </footer>
+
+</body>
+</html>
